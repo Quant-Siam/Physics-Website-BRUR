@@ -1,0 +1,82 @@
+/* static/style.css */
+
+:root {
+    --primary-color: #004d40; /* BRUR Green */
+    --secondary-color: #ffc107; /* Golden Yellow */
+    --dark-bg: #1a1a1a;
+    --light-bg: #f4f7f6;
+}
+
+body {
+    background-color: var(--light-bg);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header & Logo Section */
+.logo-section {
+    background: white;
+    padding: 20px 0;
+    border-bottom: 4px solid var(--primary-color);
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: var(--primary-color) !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.nav-link {
+    color: white !important;
+    transition: 0.3s;
+    margin: 0 10px;
+}
+
+.nav-link:hover {
+    color: var(--secondary-color) !important;
+}
+
+/* Cards & Sections */
+.card {
+    border: none;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1) !important;
+}
+
+/* Notice Board Styling */
+.notice-card .card-header {
+    background-color: var(--dark-bg) !important;
+}
+
+.notice-item {
+    border-bottom: 1px solid #eee;
+    padding: 15px;
+    transition: 0.2s;
+}
+
+.notice-item:hover {
+    background-color: #e0f2f1;
+    cursor: pointer;
+}
+
+/* Table Styling for Students */
+.table {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table thead {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Footer */
+footer {
+    background-color: var(--dark-bg);
+    color: #999;
+    padding: 30px 0;
+}

@@ -1,0 +1,19 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Department Members</h2>
+    <div class="row">
+        {% for m in members %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-primary">{{ m.name }}</h5>
+                    <p class="mb-1"><strong>Email:</strong> {{ m.email }}</p>
+                    <p class="mb-1"><strong>Blood Group:</strong> {{ m.blood }}</p>
+                    <p class="badge bg-info text-dark">{{ m.category }}</p>
+                    <hr>
+                    <a href="/member/{{ m.id }}" target="_blank" class="btn btn-sm btn-outline-primary w-100">View Full Profile</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

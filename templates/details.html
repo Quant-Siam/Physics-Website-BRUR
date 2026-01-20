@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ m.name }} - Details | Physics BRUR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        body { background-color: #f4f7f6; font-family: 'Segoe UI', sans-serif; }
+        .profile-card { 
+            border: none; 
+            border-radius: 25px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08); 
+            background: #fff; 
+            overflow: hidden;
+        }
+        .profile-header {
+            background: linear-gradient(135deg, #004d40, #00796b);
+            padding: 40px;
+            color: white;
+        }
+        .category-badge { 
+            background: rgba(255,255,255,0.2); 
+            backdrop-filter: blur(5px);
+            font-size: 0.85rem; 
+            padding: 8px 20px; 
+            border-radius: 50px; 
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .info-section { padding: 40px; }
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #004d40;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title i { margin-right: 10px; font-size: 1.3rem; }
+        .info-label { font-weight: 600; color: #555; width: 150px; display: inline-block; }
+        .info-value { color: #222; }
+        
+        .link-item { 
+            border: 1px solid #eef0f2 !important; 
+            border-left: 4px solid #004d40 !important; 
+            margin-bottom: 12px; 
+            border-radius: 10px !important;
+            transition: 0.3s; 
+            font-size: 0.9rem;
+        }
+        .link-item:hover { 
+            background-color: #f0fdf4; 
+            transform: translateX(8px); 
+            border-color: #004d40 !important;
+        }
+        .back-nav {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="back-nav sticky-top">
+    <div class="container d-flex align-items-center">
+        <a href="javascript:history.back()" class="btn btn-outline-dark btn-sm rounded-pill px-3">
+            <i class="bi bi-arrow-left me-1"></i> Back
+        </a>
+        <span class="ms-3 fw-bold text-muted small text-uppercase">Profile View</span>
+    </div>
+</nav>
+
+<div class="container mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card profile-card">
+                <div class="profile-header text-center text-md-start">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <span class="badge category-badge mb-3">{{ m.category }}</span>
+                            <h1 class="fw-bold mb-1">{{ m.name }}</h1>
+                            <p class="mb-0 opacity-75"><i class="bi bi-geo-alt me-1"></i> Department of Physics, BRUR</p>
+                        </div>
+                        {% if m.blood_group %}
+                        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                            <div class="d-inline-block text-center p-3 rounded-4" style="background: rgba(255,255,255,0.15);">
+                                <small class="d-block text-uppercase opacity-75 small">Blood Group</small>
+                                <h3 class="fw-bold mb-0">{{ m.blood_group }}</h3>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <div class="row g-5">
+                        <div class="col-md-6 border-end">
+                            <div class="section-title">
+                                <i class="bi bi-person-vcard text-success"></i> Basic Information
+                            </div>
+                            
+                            <div class="mb-3">
+                                <span class="info-label"><i class="bi bi-envelope me-2"></i>Email:</span>
+                                <span class="info-value">{{ m.email if m.email else 'Not Provided' }}</span>
+                            </div>
+                            <div class="mb-3">
+                                <span class="info-label"><i class="bi bi-telephone me-2"></i>Phone:</span>
+                                <span class="info-value">{{ m.phone if m.phone else 'Not Provided' }}</span>
+                            </div>
+
+                            {% if m.category == 'Teacher' %}
+                                <div class="mb-3">
+                                    <span class="info-label"><i class="bi bi-briefcase me-2"></i>Designation:</span>
+                                    <span class="info-value">{{ m.designation }}</span>
+                                </div>
+                                <div class="mb-3">
+                                    <span class="info-label"><i class="bi bi-lightbulb me-2"></i>Interest:</span>
+                                    <span class="info-value text-success fw-semibold">{{ m.field_interest }}</span>
+                                </div>
+                            {% elif m.category in ['Student', 'Alumni'] %}
+                                <div class="mb-3">
+                                    <span class="info-label"><i class="bi bi-fingerprint me-2"></i>ID:</span>
+                                    <span class="info-value">{{ m.student_id }}</span>
+                                </div>
+                                <div class="mb-3">
+                                    <span class="info-label"><i class="bi bi-journal-check me-2"></i>Reg No:</span>
+                                    <span class="info-value">{{ m.reg_no }}</span>
+                                </div>
+                                <div class="mb-3">
+                                    <span class="info-label"><i class="bi bi-calendar-event me-2"></i>Batch:</span>
+                                    <span class="info-value fw-bold text-primary">{{ m.batch }}</span>
+                                </div>
+                                <div class="mb-3">
+                                    <span class="info-label"><i class="bi bi-star me-2"></i>Interest:</span>
+                                    <span class="info-value">{{ m.area_interest }}</span>
+                                </div>
+                            {% elif m.category in ['Staff', 'Lab Attendant', 'Seminar Attendant'] %}
+                                <div class="mb-3">
+                                    <span class="info-label"><i class="bi bi-building me-2"></i>Position:</span>
+                                    <span class="info-value">{{ m.position_work }}</span>
+                                </div>
+                                <div class="mb-3">
+                                    <span class="info-label"><i class="bi bi-tools me-2"></i>Expertise:</span>
+                                    <span class="info-value">{{ m.expertise }}</span>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="section-title">
+                                <i class="bi bi-link-45deg text-success"></i> Profiles & Research
+                            </div>
+                            {% if m.research_links %}
+                                <div class="list-group list-group-flush">
+                                    {% for link in m.research_links.split(',') %}
+                                        {% if link.strip() %}
+                                        <a href="{{ link.strip() }}" target="_blank" class="list-group-item list-group-item-action link-item">
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-globe2 me-2 text-muted"></i>
+                                                <span class="text-truncate">{{ link.strip() }}</span>
+                                                <i class="bi bi-box-arrow-up-right ms-auto small text-muted"></i>
+                                            </div>
+                                        </a>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <div class="text-center py-4 bg-light rounded-3">
+                                    <i class="bi bi-info-circle text-muted d-block mb-2"></i>
+                                    <p class="text-muted small mb-0 italic">No research or social links available.</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center pb-4">
+                    <hr class="mx-5 opacity-25">
+                    <p class="text-muted small mb-0">Physicist Profile &bull; Begum Rokeya University, Rangpur</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
