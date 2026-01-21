@@ -23,7 +23,7 @@ class Member(db.Model):
     field_interest = db.Column(db.String(200))
     position_work = db.Column(db.String(100))
     expertise = db.Column(db.String(200))
-    student_id = db.Column(db.String(50), unique=True) # Unique ID Constraint
+    student_id = db.Column(db.String(50), unique=True)
     reg_no = db.Column(db.String(50))          
     batch = db.Column(db.String(20))           
     area_interest = db.Column(db.String(200))
@@ -57,9 +57,9 @@ def all_notices():
 
 @app.route('/research')
 def research():
-    # ডেটাবেস থেকে সব রিসার্চ পেপার নিয়ে আসা (নতুনটি আগে থাকবে)
+    # এখানে আপনার ফাইলের নাম অনুযায়ী 'research.html' করে দেওয়া হয়েছে
     researches = Research.query.order_by(Research.id.desc()).all()
-    return render_template('research_view.html', researches=researches)
+    return render_template('research.html', researches=researches)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -86,7 +86,6 @@ def add_member():
         s_id = request.form.get('student_id')
         category = request.form.get('category')
         
-        # ডুপ্লিকেট আইডি চেক
         if s_id and s_id.strip():
             existing = Member.query.filter_by(student_id=s_id.strip()).first()
             if existing:
@@ -135,19 +134,28 @@ def add_research():
 @app.route('/delete_member/<int:id>')
 def delete_member(id):
     if session.get('logged_in'):
-        m = Member.query.get(id); db.session.delete(m); db.session.commit()
+        m = Member.query.get(id)
+        if m:
+            db.session.delete(m)
+            db.session.commit()
     return redirect(url_for('admin'))
 
 @app.route('/delete_notice/<int:id>')
 def delete_notice(id):
     if session.get('logged_in'):
-        n = Notice.query.get(id); db.session.delete(n); db.session.commit()
+        n = Notice.query.get(id)
+        if n:
+            db.session.delete(n)
+            db.session.commit()
     return redirect(url_for('admin'))
 
 @app.route('/delete_research/<int:id>')
 def delete_research(id):
     if session.get('logged_in'):
-        r = Research.query.get(id); db.session.delete(r); db.session.commit()
+        r = Research.query.get(id)
+        if r:
+            db.session.delete(r)
+            db.session.commit()
     return redirect(url_for('admin'))
 
 @app.route('/explore/<type>')
@@ -182,8 +190,7 @@ def logout():
     session.clear()
     return redirect(url_for('home'))
 
-with app.app_context():
-    db.create_all()
-
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)

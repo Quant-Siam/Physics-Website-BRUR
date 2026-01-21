@@ -21,7 +21,7 @@
         /* Slim Header Section */
         .logo-section { 
             background: white; 
-            padding: 10px 0; /* প্যাডিং কমিয়ে স্লিম করা হয়েছে */
+            padding: 10px 0; 
             border-bottom: 3px solid var(--primary-color); 
         }
         
@@ -39,7 +39,7 @@
         }
 
         .brur-logo-sm {
-            height: 65px; /* লোগোর স্লিম সাইজ */
+            height: 65px; 
             width: auto;
         }
 
@@ -103,7 +103,10 @@
                 <p class="univ-name">Begum Rokeya University, Rangpur</p>
             </div>
             <div class="col-3 col-md-2 text-end">
-                <img src="{{ url_for('static', filename='brur_logo.png') }}" alt="BRUR Logo" class="brur-logo-sm img-fluid">
+                <img src="https://upload.wikimedia.org/wikipedia/en/3/30/Begum_Rokeya_University_Logo.png" 
+                     alt="BRUR Logo" 
+                     class="brur-logo-sm img-fluid"
+                     onerror="this.onerror=null; this.src='{{ url_for('static', filename='brur_logo.png') }}';">
             </div>
         </div>
     </div>
