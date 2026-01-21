@@ -3,10 +3,12 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 
 app = Flask(__name__)
-app.secret_key = "physics_brur_2026"
+# Secret key টি পরিবেশ ভেরিয়েবল থেকে নেওয়ার চেষ্টা করবে, না থাকলে ডিফল্টটি নিবে
+app.secret_key = os.environ.get("SECRET_KEY", "physics_brur_2026")
 
 # Database Setup
 basedir = os.path.abspath(os.path.dirname(__file__))
+# SQLite ডাটাবেস পাথ সেটআপ
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'database.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -57,7 +59,6 @@ def all_notices():
 
 @app.route('/research')
 def research():
-    # এখানে আপনার ফাইলের নাম অনুযায়ী 'research.html' করে দেওয়া হয়েছে
     researches = Research.query.order_by(Research.id.desc()).all()
     return render_template('research.html', researches=researches)
 
@@ -190,7 +191,10 @@ def logout():
     session.clear()
     return redirect(url_for('home'))
 
+# --- Main Entry Point ---
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run(debug=True)
+    # সার্ভারের দেওয়া পোর্টে রান করার জন্য এই অংশটি জরুরি
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
