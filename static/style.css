@@ -1,5 +1,4 @@
-/* static/style.css */
-
+/* --- Root Variables --- */
 :root {
     --primary-color: #004d40; /* BRUR Green */
     --secondary-color: #ffc107; /* Golden Yellow */
@@ -7,19 +6,41 @@
     --light-bg: #f4f7f6;
 }
 
+/* --- General Body Styling --- */
 body {
     background-color: var(--light-bg);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-/* Header & Logo Section */
+/* --- Slim Header & Logo Section --- */
 .logo-section {
     background: white;
-    padding: 20px 0;
-    border-bottom: 4px solid var(--primary-color);
+    padding: 10px 0; /* প্যাডিং কমিয়ে সেকশনটি ছোট করা হয়েছে */
+    border-bottom: 3px solid var(--primary-color);
 }
 
-/* Navigation Bar */
+.logo-section h1 {
+    font-size: 1.8rem; /* ডেস্কটপে টাইটেল সাইজ */
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.logo-section p {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-bottom: 0;
+}
+
+.logo-section img {
+    max-height: 75px; /* লোগোর সাইজ ছোট করা হয়েছে */
+    width: auto;
+    object-fit: contain;
+}
+
+/* --- Navigation Bar --- */
 .navbar {
     background-color: var(--primary-color) !important;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -29,13 +50,49 @@ body {
     color: white !important;
     transition: 0.3s;
     margin: 0 10px;
+    font-weight: 500;
 }
 
 .nav-link:hover {
     color: var(--secondary-color) !important;
 }
 
-/* Cards & Sections */
+/* --- Mobile View Adjustments (Responsive) --- */
+@media (max-width: 768px) {
+    .logo-section {
+        padding: 8px 0;
+    }
+    
+    .logo-section h1 {
+        font-size: 1.3rem !important; /* মোবাইলে টাইটেল আরও ছোট হবে */
+        text-align: center;
+    }
+
+    .logo-section p {
+        font-size: 0.85rem !important;
+        text-align: center;
+    }
+
+    .logo-section img {
+        max-height: 55px !important; /* মোবাইলে লোগো আরও ছোট হবে */
+        display: block;
+        margin: 5px auto 0; /* মোবাইলে লোগো নিচে এবং সেন্টারে আসবে */
+    }
+
+    .navbar-collapse {
+        background-color: var(--primary-color);
+        padding: 15px;
+        border-radius: 0 0 10px 10px;
+        text-align: center;
+    }
+    
+    .nav-link {
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        padding: 10px 0;
+    }
+}
+
+/* --- Cards & Components --- */
 .card {
     border: none;
     border-radius: 12px;
@@ -46,37 +103,13 @@ body {
     box-shadow: 0 8px 20px rgba(0,0,0,0.1) !important;
 }
 
-/* Notice Board Styling */
 .notice-card .card-header {
     background-color: var(--dark-bg) !important;
 }
 
-.notice-item {
-    border-bottom: 1px solid #eee;
+.admission-card {
+    background: #fff3cd;
+    border-left: 5px solid var(--secondary-color);
     padding: 15px;
-    transition: 0.2s;
-}
-
-.notice-item:hover {
-    background-color: #e0f2f1;
-    cursor: pointer;
-}
-
-/* Table Styling for Students */
-.table {
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.table thead {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-/* Footer */
-footer {
-    background-color: var(--dark-bg);
-    color: #999;
-    padding: 30px 0;
+    border-radius: 8px;
 }
